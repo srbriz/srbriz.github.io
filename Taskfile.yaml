@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: 3
+
+tasks:
+    default:
+        desc: List Available Tasks
+        cmds:
+            - task --list-all
+
+    claude:
+        desc: Launch Claude Code
+        interactive: true
+        cmds:
+            - claude
+        preconditions:
+            - which claude
+            - which gh
+            - which uvx
+            - which npx
+            - which github-mcp-server
+        env:
+            GITHUB_PERSONAL_ACCESS_TOKEN:
+                sh: gh auth token
+
+    install:
+        desc: Install project dependencies
+        cmds:
+            - task install-deps
+            - pre-commit install
+        preconditions:
+            - which pre-commit
+
+    install-deps:
+        desc: Install Development Dependencies
+        cmds:
+            - brew install pre-commit
+            - brew install go-task
+            - brew install gh
+            - brew install node
+            - brew install uv
+            - brew install github-mcp-server
+            - brew install --cask claude-code
+        preconditions:
+            - which brew
+
+    build:
+        desc: Build the project
+        cmds:
+            - "echo 'No-Op: build'"
+
+    lint:
+        desc: Lint the project
+        cmds:
+            - pre-commit run --all-files
+        preconditions:
+            - which pre-commit
+
+    clean:
+        desc: Clean generated artifacts
+        cmds:
+            - "echo 'No-Op: clean'"

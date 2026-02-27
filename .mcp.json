@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "github": {
+            "type": "stdio",
+            "command": "github-mcp-server",
+            "args": ["stdio"]
+        },
+        "chrome-dev-tools": {
+            "type": "stdio",
+            "command": "npx",
+            "args": ["-y", "chrome-devtools-mcp@latest"]
+        }
+    }
+}
